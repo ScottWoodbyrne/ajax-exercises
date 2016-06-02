@@ -8,6 +8,12 @@
 		#user-topping * {
 			margin-right: 10px;
 		}
+		.container{
+			background-color: lightblue;
+			border-radius: 5px;
+			border: solid 1px black;
+			padding: 10px;
+		}
 	</style>
 </head>
 <body>
@@ -37,7 +43,7 @@
         <h4 class="modal-title" id="myModalLabel">your Order</h4>
       </div>
       <div class="modal-body">
-        <p id="killer"></p>
+        
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -108,9 +114,11 @@
 
 			// var selectedToppingName = $('#user-topping option:selected').text();
 
-			var finalMsg = '<p>You have ordered a donut with Batter '+selectedBatterName+' (code:'+selectedBatterValue+') and with Toppings'+listToppings; +'</p>'
+			var finalMsg = '<p>Please confirm order of one donut with Batter '+selectedBatterName+' (code:'+selectedBatterValue+') and with Toppings'+listToppings; +'</p>'
  
-			$(".modal-body #killer").val(finalMsg);
+			// $(".modal-body #killer").val(finalMsg);
+			
+			$(".modal-body").html(finalMsg)	
 
 		});
 
@@ -131,6 +139,7 @@
 		});
 
 	</script>
+	<script src="https://www.atlasestateagents.co.uk/javascript/tether.min.js"></script>
 
 	<script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js"></script>
 </body>
