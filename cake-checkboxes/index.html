@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>cake selector</title>
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+<form>
+<legend><h1>Cake Builder</h1></legend>
+<div class="row">
+
+	<div class="col-xs-12">
+		<h3>Select your batter</h3>
+		<div id="batter"></div>
+	</div>
+
+</div>
+
+<div class="row">
+
+	<div class="col-xs-12">
+		<h3>Select your topping</h3>
+		<div id="topping"></div>
+	</div>
+
+</div>
+<button class="btn btn-primary">Order Now!!</button>
+
+</form>
+
+</div>
+<div class="container">
+<h2></h2>
+</div>
+	<script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
+	<script>
+	var htmlBatter="";
+	var htmlTopping="";
+
+		$.ajax ({
+			url: "cakes.json",
+			dataType: "json"
+		})
+		.done(function(dataJson){
+			var batters = dataJson.batters.batter;
+			$.each(batters, function (index, objectBatter){
+				var id = objectBatter.id;
+				var type = objectBatter.type;
+			 	htmlBatter += '<label class="checkbox-inline"><input type="checkbox"id="'+id+'" value="option1">'+type+'</label>';
+			})
+
+			var topping = dataJson.topping;
+			$.each(topping, function(index, objectTopping){
+				var id = objectTopping.id;
+				var type = objectTopping.type;
+				htmlTopping += '<label class="checkbox-inline"><input type="checkbox"id="'+id+'" value="option1">'+type+'</label>';
+
+			});
+		$("#batter").html(htmlBatter);
+		$("#topping").html(htmlTopping);	
+		});
+
+		$("button").on("click", function(eventObject){
+			eventObject.preventDefault();
+			if ($("#topping").find("option:selected").text()=="None") {
+				var batterSelected= $("#batter").find("option:selected").text();
+				var msgOrder= "You have ordered a Cake with no topping and "+batterSelected+" as a batter!!"
+			}
+			else{
+			var toppingSelected=$("#topping").find("option:selected").text();
+			var batterSelected= $("#batter").find("option:selected").text();
+			var msgOrder= "You have ordered a Cake with "+toppingSelected+" as a topping and "+batterSelected+" as a batter!!"
+		}
+			$("h2").text(msgOrder)
+
+		})
+
+		
+
+	</script>
+</body>
+</html>

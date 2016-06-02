@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>color converter</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<style type="text/css">
+	body {
+		padding: 20px;
+	};
+	
+fieldset {
+	border: solid 1px black;
+	background-color: blue;
+}
+
+</style>
+</head>
+<body>
+<div class ="container">
+<form>
+	<legend>Pick your color</legend>
+	<row >
+		<fieldset>
+			<select class= "selectpicker col-sm-2">
+				
+			</select>
+		
+		<button class="btn btn-primary">get hex</button>
+		</fieldset>
+	</row>
+</form>
+</div>
+	<script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
+	<script >
+
+	var htmlStr="";
+
+		$.ajax({
+			url: 'colors.json',
+			dataType: 'json' 
+		})
+		.done(function(dataJson){
+			$.each (dataJson function(index, objectColor){
+				htmlStr += '<option value="' + objectColor.value + '">' +objectColor.color+'</option>'
+			})
+			$("Select").html(htmlStr)
+			});
+
+	$("button").on("click", function(){
+		alert($("select").val())
+	})
+
+	</script>
+</body>
+</html>
